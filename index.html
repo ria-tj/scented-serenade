@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scented Serenade</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <!-- AOS -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Hero Section -->
+  <header class="hero">
+    <img src="logo.jpg" alt="Scented Serenade Logo" class="logo">
+    <h1>Scented Serenade</h1>
+    <p>Luxury scents that tell your story</p>
+    <div class="cart-icon">
+  <i class="fa-solid fa-cart-shopping"></i>
+  <span id="cartCount">0</span>
+</div>
+    <div class="hero-buttons">
+      <a href="#about" class="btn">Explore</a>
+      <a href="#products" class="btn">Shop Now</a>
+    </div>
+  </header>
+
+  <!-- About Section -->
+  <section id="about" class="about">
+    <h2>About Us</h2>
+    <p>At Scented Serenade, we create timeless fragrances inspired by elegance and nature. Each bottle is crafted to evoke memories and emotions.</p>
+  </section>
+
+  <!-- Products Section -->
+  <section id="products" class="products">
+    <h2>Our Signature Scents</h2>
+    <div class="product-grid" id="product-grid">
+      <!-- JS will inject product cards -->
+    </div>
+  </section>
+
+  <!-- Cart Section -->
+  <section class="cart">
+    <h2>Your Cart</h2>
+    <div id="cart-items"></div>
+    <p id="cart-total">Total: $0</p>
+    <button id="checkout-btn">Proceed to Checkout</button>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="testimonials">
+    <h2>What Our Customers Say</h2>
+    <div class="testimonial" data-aos="fade-up">
+      <p>"Scented Serenade perfumes are absolutely heavenly! I get compliments every day." – Aisha</p>
+    </div>
+    <div class="testimonial" data-aos="fade-up">
+      <p>"The best gift I’ve ever given. Elegant and lasting scents." – Brian</p>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact">
+    <h2>Contact Us</h2>
+    <p>
+      <i class="fa-solid fa-envelope"></i>
+      <a href="mailto:scentedserenade@gmail.com">scentedserenade@gmail.com</a>
+    </p>
+    <p>
+      <i class="fa-brands fa-instagram"></i>
+      <a href="https://www.instagram.com/scented.serenade/" target="_blank">@scented.serenade</a>
+    </p>
+    <p>
+      <i class="fa-brands fa-whatsapp"></i>
+      <a href="https://wa.me/25470133273" target="_blank">Chat on WhatsApp</a>
+    </p>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Scented Serenade. All rights reserved.</p>
+  </footer>
+
+  <!-- Floating WhatsApp Button -->
+  <a href="https://wa.me/25470133273" class="whatsapp-float" target="_blank">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
+
+  <!-- AOS Script -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
+
+  <!-- E-commerce Script -->
+  <script>
+    // Product Data
+    const products = [
+      { id: 1, name: "Aqua Di Gio", price: 45, image: "perfume1.jpg" },
+      { id: 2, name: "Golden Mist", price: 60, image: "perfume2.jpg" },
+      { id: 3, name: "Yves Saint Laurent", price: 55, image: "perfume3.jpg" }
+    ];
+
+    let cart = [];
+
+    // Generate product cards
+    const grid = document.getElementById('product-grid');
+    products.forEach(p => {
+      const card = document.createElement('div');
+      card.className = 'product-card';
+      card.innerHTML = `
+        <img src="${p.image}" alt="${p.name}">
+        <h3>${p.name}</h3>
+        <p>$${p.price}</p>
+        <button onclick="addToCart(${p.id})">Add to Cart</button>
+      `;
+      grid.appendChild(card);
+    });
+
+    // Add to Cart
+    function addToCart(id) {
+      const product = products.find(p => p.id === id);
+      const existing = cart.find(item => item.id === id);
+      if (existing) {
+        existing.qty++;
+      } else {
+        cart.push({ ...product, qty: 1 });
+      }
+      renderCart();
+    }
+
+    // Render Cart
+    function renderCart() {
+      const container = document.getElementById('cart-items');
+      container.innerHTML = '';
+      let total = 0;
+      cart.forEach(item => {
+        total += item.price * item.qty;
+        const div = document.createElement('div');
+        div.className = 'cart-item';
+        div.innerHTML = `
+          <span>${item.name} x${item.qty}</span>
+          <span>$${item.price * item.qty}</span>
+          <button onclick="removeItem(${item.id})">Remove</button>
+        `;
+        container.appendChild(div);
+      });
+      document.getElementById('cart-total').textContent = 'Total: $' + total;
+    }
+
+    // Remove Item
+    function removeItem(id) {
+      cart = cart.filter(item => item.id !== id);
+      renderCart();
+    }
+
+    // Checkout
+    document.getElementById('checkout-btn').addEventListener('click', () => {
+      if (cart.length === 0) {
+        alert('Your cart is empty!');
+      } else {
+        alert('Checkout coming soon! We will integrate payments later.');
+      }
+    });
+  </script>
+  <!-- Product Modal -->
+<div id="productModal" class="modal">
+  <div class="modal-content">
+    <span class="close-modal">&times;</span>
+    <img id="modalImage" src="" alt="Product image">
+    <h3 id="modalTitle"></h3>
+    <p id="modalDesc"></p>
+    <button class="btn add-to-cart">Add to Cart</button>
+  </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
