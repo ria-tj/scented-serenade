@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Scented Serenade</title>
+  <title>Scented Serenade - Luxury Perfumes</title>
 
   <!-- CSS -->
   <link rel="stylesheet" href="style.css">
 
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
 
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
@@ -19,168 +19,220 @@
 </head>
 <body>
 
+  <!-- Navigation -->
+  <nav class="nav-header">
+    <div class="nav-content">
+      <a href="#" class="nav-logo">Scented Serenade</a>
+      <ul class="nav-links">
+        <li><a href="#hero">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#products">Products</a></li>
+        <li><a href="#testimonials">Reviews</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button class="mobile-menu-btn">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </nav>
+
   <!-- Hero Section -->
-  <header class="hero">
+  <header id="hero" class="hero">
     <img src="logo.jpg" alt="Scented Serenade Logo" class="logo">
     <h1>Scented Serenade</h1>
     <p>Luxury scents that tell your story</p>
-    <div class="cart-icon">
-  <i class="fa-solid fa-cart-shopping"></i>
-  <span id="cartCount">0</span>
-</div>
     <div class="hero-buttons">
       <a href="#about" class="btn">Explore</a>
       <a href="#products" class="btn">Shop Now</a>
     </div>
   </header>
 
+  <!-- Cart Icon -->
+  <div class="cart-icon" onclick="toggleCart()">
+    <i class="fa-solid fa-cart-shopping"></i>
+    <span id="cartCount">0</span>
+  </div>
+
+  <!-- Search Section -->
+  <section class="search-section">
+    <div class="container">
+      <div class="search-container">
+        <input type="text" id="searchBox" class="search-box" placeholder="Search for perfumes...">
+        <button class="search-btn" onclick="searchProducts()">
+          <i class="fas fa-search"></i>
+        </button>
+      </div>
+      <div class="search-filters">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="men">Men</button>
+        <button class="filter-btn" data-filter="women">Women</button>
+        <button class="filter-btn" data-filter="unisex">Unisex</button>
+        <button class="filter-btn" data-filter="luxury">Luxury</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Admin Controls -->
+  <section class="admin-controls">
+    <div class="container">
+      <h3>Admin Controls</h3>
+      <button class="admin-btn" onclick="showAddProductForm()">
+        <i class="fas fa-plus"></i> Add New Product
+      </button>
+      <button class="admin-btn" onclick="toggleEditMode()">
+        <i class="fas fa-edit"></i> Toggle Edit Mode
+      </button>
+      <button class="admin-btn" onclick="exportProducts()">
+        <i class="fas fa-download"></i> Export Products
+      </button>
+    </div>
+  </section>
+
   <!-- About Section -->
   <section id="about" class="about">
-    <h2>About Us</h2>
-    <p>At Scented Serenade, we create timeless fragrances inspired by elegance and nature. Each bottle is crafted to evoke memories and emotions.</p>
+    <div class="container">
+      <h2>About Us</h2>
+      <p>At Scented Serenade, we create timeless fragrances inspired by elegance and nature. Each bottle is crafted to evoke memories and emotions, bringing you closer to the moments that matter most.</p>
+    </div>
   </section>
 
   <!-- Products Section -->
   <section id="products" class="products">
-    <h2>Our Signature Scents</h2>
-    <div class="product-grid" id="product-grid">
-      <!-- JS will inject product cards -->
+    <div class="container">
+      <h2>Our Signature Scents</h2>
+      <div class="product-grid" id="product-grid">
+        <!-- Products will be dynamically loaded here -->
+      </div>
     </div>
   </section>
 
   <!-- Cart Section -->
-  <section class="cart">
-    <h2>Your Cart</h2>
-    <div id="cart-items"></div>
-    <p id="cart-total">Total: $0</p>
-    <button id="checkout-btn">Proceed to Checkout</button>
+  <section class="cart hidden" id="cart-section">
+    <div class="container">
+      <h2>Your Cart</h2>
+      <div class="cart-items" id="cart-items">
+        <p>Your cart is empty</p>
+      </div>
+      <p class="cart-total" id="cart-total">Total: $0</p>
+      <button class="btn" id="checkout-btn">Proceed to Checkout</button>
+      <button class="btn" onclick="toggleCart()" style="background: #6c757d; margin-left: 10px;">Continue Shopping</button>
+    </div>
   </section>
 
   <!-- Testimonials Section -->
-  <section class="testimonials">
-    <h2>What Our Customers Say</h2>
-    <div class="testimonial" data-aos="fade-up">
-      <p>"Scented Serenade perfumes are absolutely heavenly! I get compliments every day." – Aisha</p>
-    </div>
-    <div class="testimonial" data-aos="fade-up">
-      <p>"The best gift I’ve ever given. Elegant and lasting scents." – Brian</p>
+  <section id="testimonials" class="testimonials">
+    <div class="container">
+      <h2>What Our Customers Say</h2>
+      <div class="testimonials-grid">
+        <div class="testimonial" data-aos="fade-up">
+          <p>"Scented Serenade perfumes are absolutely heavenly! I get compliments every day. The quality is unmatched and the scents last all day long."</p>
+          <strong>– Aisha K.</strong>
+        </div>
+        <div class="testimonial" data-aos="fade-up" data-aos-delay="200">
+          <p>"The best gift I've ever given. Elegant packaging and lasting scents that make every moment special. Highly recommended!"</p>
+          <strong>– Brian M.</strong>
+        </div>
+        <div class="testimonial" data-aos="fade-up" data-aos-delay="400">
+          <p>"Amazing customer service and premium quality fragrances. Each scent tells a unique story. I'm a customer for life!"</p>
+          <strong>– Sarah L.</strong>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- Contact Section -->
-  <section class="contact">
-    <h2>Contact Us</h2>
-    <p>
-      <i class="fa-solid fa-envelope"></i>
-      <a href="mailto:scentedserenade@gmail.com">scentedserenade@gmail.com</a>
-    </p>
-    <p>
-      <i class="fa-brands fa-instagram"></i>
-      <a href="https://www.instagram.com/scented.serenade/" target="_blank">@scented.serenade</a>
-    </p>
-    <p>
-      <i class="fa-brands fa-whatsapp"></i>
-      <a href="https://wa.me/25470133273" target="_blank">Chat on WhatsApp</a>
-    </p>
+  <section id="contact" class="contact">
+    <div class="container">
+      <h2>Contact Us</h2>
+      <div class="contact-grid">
+        <div class="contact-item">
+          <p>
+            <i class="fa-solid fa-envelope"></i>
+            <a href="mailto:scentedserenade@gmail.com">scentedserenade@gmail.com</a>
+          </p>
+        </div>
+        <div class="contact-item">
+          <p>
+            <i class="fa-brands fa-instagram"></i>
+            <a href="https://www.instagram.com/scented.serenade/" target="_blank">@scented.serenade</a>
+          </p>
+        </div>
+        <div class="contact-item">
+          <p>
+            <i class="fa-brands fa-whatsapp"></i>
+            <a href="https://wa.me/25470133273" target="_blank">Chat on WhatsApp</a>
+          </p>
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- Footer -->
   <footer>
-    <p>&copy; 2025 Scented Serenade. All rights reserved.</p>
+    <div class="container">
+      <p>&copy; 2025 Scented Serenade. All rights reserved. | Crafted with ❤️ for fragrance lovers</p>
+    </div>
   </footer>
 
   <!-- Floating WhatsApp Button -->
-  <a href="https://wa.me/25470133273" class="whatsapp-float" target="_blank">
+  <a href="https://wa.me/25470133273" class="whatsapp-float" target="_blank" title="Chat with us on WhatsApp">
     <i class="fa-brands fa-whatsapp"></i>
   </a>
 
-  <!-- AOS Script -->
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script>
-    AOS.init();
-  </script>
-
-  <!-- E-commerce Script -->
-  <script>
-    // Product Data
-    const products = [
-      { id: 1, name: "Aqua Di Gio", price: 45, image: "perfume1.jpg" },
-      { id: 2, name: "Golden Mist", price: 60, image: "perfume2.jpg" },
-      { id: 3, name: "Yves Saint Laurent", price: 55, image: "perfume3.jpg" }
-    ];
-
-    let cart = [];
-
-    // Generate product cards
-    const grid = document.getElementById('product-grid');
-    products.forEach(p => {
-      const card = document.createElement('div');
-      card.className = 'product-card';
-      card.innerHTML = `
-        <img src="${p.image}" alt="${p.name}">
-        <h3>${p.name}</h3>
-        <p>$${p.price}</p>
-        <button onclick="addToCart(${p.id})">Add to Cart</button>
-      `;
-      grid.appendChild(card);
-    });
-
-    // Add to Cart
-    function addToCart(id) {
-      const product = products.find(p => p.id === id);
-      const existing = cart.find(item => item.id === id);
-      if (existing) {
-        existing.qty++;
-      } else {
-        cart.push({ ...product, qty: 1 });
-      }
-      renderCart();
-    }
-
-    // Render Cart
-    function renderCart() {
-      const container = document.getElementById('cart-items');
-      container.innerHTML = '';
-      let total = 0;
-      cart.forEach(item => {
-        total += item.price * item.qty;
-        const div = document.createElement('div');
-        div.className = 'cart-item';
-        div.innerHTML = `
-          <span>${item.name} x${item.qty}</span>
-          <span>$${item.price * item.qty}</span>
-          <button onclick="removeItem(${item.id})">Remove</button>
-        `;
-        container.appendChild(div);
-      });
-      document.getElementById('cart-total').textContent = 'Total: $' + total;
-    }
-
-    // Remove Item
-    function removeItem(id) {
-      cart = cart.filter(item => item.id !== id);
-      renderCart();
-    }
-
-    // Checkout
-    document.getElementById('checkout-btn').addEventListener('click', () => {
-      if (cart.length === 0) {
-        alert('Your cart is empty!');
-      } else {
-        alert('Checkout coming soon! We will integrate payments later.');
-      }
-    });
-  </script>
   <!-- Product Modal -->
-<div id="productModal" class="modal">
-  <div class="modal-content">
-    <span class="close-modal">&times;</span>
-    <img id="modalImage" src="" alt="Product image">
-    <h3 id="modalTitle"></h3>
-    <p id="modalDesc"></p>
-    <button class="btn add-to-cart">Add to Cart</button>
+  <div id="productModal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <img id="modalImage" src="" alt="Product image">
+      <h3 id="modalTitle"></h3>
+      <p id="modalDesc"></p>
+      <p id="modalPrice"></p>
+      <button class="btn add-to-cart-modal">Add to Cart</button>
+    </div>
   </div>
-</div>
-<script src="script.js"></script>
+
+  <!-- Add/Edit Product Modal -->
+  <div id="productFormModal" class="modal">
+    <div class="modal-content">
+      <span class="close-form-modal">&times;</span>
+      <h3 id="formModalTitle">Add New Product</h3>
+      <form id="productForm">
+        <div class="form-group">
+          <label for="productName">Product Name:</label>
+          <input type="text" id="productName" required>
+        </div>
+        <div class="form-group">
+          <label for="productPrice">Price ($):</label>
+          <input type="number" id="productPrice" min="0" step="0.01" required>
+        </div>
+        <div class="form-group">
+          <label for="productImage">Image URL:</label>
+          <input type="url" id="productImage" required>
+        </div>
+        <div class="form-group">
+          <label for="productCategory">Category:</label>
+          <select id="productCategory" required>
+            <option value="men">Men</option>
+            <option value="women">Women</option>
+            <option value="unisex">Unisex</option>
+            <option value="luxury">Luxury</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="productDescription">Description:</label>
+          <textarea id="productDescription" rows="3" required></textarea>
+        </div>
+        <button type="submit" class="btn">Save Product</button>
+        <button type="button" class="btn" onclick="closeProductForm()" style="background: #6c757d; margin-left: 10px;">Cancel</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Message Container -->
+  <div id="messageContainer"></div>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
